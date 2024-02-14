@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <p>Rock Paper Scissors</p>
+
+    <button onclick="
+      let computerMove = Math.floor(Math.random() * 3) + 1;
+      let duelResult = '';
+      
+      if (computerMove == 1) {
+        computerMove = 'rock';
+        duelResult = 'Tie.';
+      } else if (computerMove == 2) {
+        computerMove = 'paper';
+        duelResult = 'You lose.';
+      } else if (computerMove == 3) {
+        computerMove = 'scissors';
+        duelResult = 'You win.';
+      }
+
+      alert(`You picked rock. Computer picked ${computerMove}. ${duelResult}`); ">
+      Rock
+    </button>
+
+    <button
+      onclick="
+      let computerMove = Math.floor(Math.random() * 3) + 1;
+      let duelResult = '';
+      
+      if (computerMove == 1) {
+        computerMove = 'rock';
+        duelResult = 'You lose.';
+      } else if (computerMove == 2) {
+        computerMove = 'paper';
+        duelResult = 'Tie.';
+      } else if (computerMove == 3) {
+        computerMove = 'scissors';
+        duelResult = 'You lose.';
+      }
+      alert(`You picked paper. Computer picked ${computerMove}. ${duelResult}`)">
+      Paper
+    </button>
+
+    <button
+      onclick="
+      let computerMove = Math.floor(Math.random() * 3) + 1;
+      let duelResult = '';
+      
+      if (computerMove == 1) {
+        computerMove = 'rock';
+        duelResult = 'You lose.';
+      } else if (computerMove == 2) {
+        computerMove = 'paper';
+        duelResult = 'You win.';
+      } else if (computerMove == 3) {
+        computerMove = 'scissors';
+        duelResult = 'Tie.';
+      }
+
+      alert(`You picked scissors. Computer picked ${computerMove}. ${duelResult}`)">
+      Scissors
+    </button>
+
+    <script>
+    </script>
+  </body>
+</html>
