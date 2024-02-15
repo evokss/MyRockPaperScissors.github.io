@@ -6,67 +6,68 @@
     <title>Rock Paper Scissors</title>
   </head>
   <body>
-    <p>Rock Paper Scissors</p>
+    <p>Classic Rock Paper Scissors</p>
 
     <button onclick="
-      let computerMove = Math.floor(Math.random() * 3) + 1;
-      let duelResult = '';
-      
-      if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'Tie.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'You lose.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'You win.';
-      }
+      playGame('rock');
+    ">Rock</button>
 
-      alert(`You picked rock. Computer picked ${computerMove}. ${duelResult}`); ">
-      Rock
-    </button>
+    <button onclick="
+      playGame('paper');
+    ">Paper</button>
 
-    <button
-      onclick="
-      let computerMove = Math.floor(Math.random() * 3) + 1;
-      let duelResult = '';
-      
-      if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'You lose.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'Tie.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'You lose.';
-      }
-      alert(`You picked paper. Computer picked ${computerMove}. ${duelResult}`)">
-      Paper
-    </button>
-
-    <button
-      onclick="
-      let computerMove = Math.floor(Math.random() * 3) + 1;
-      let duelResult = '';
-      
-      if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'You lose.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'You win.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'Tie.';
-      }
-
-      alert(`You picked scissors. Computer picked ${computerMove}. ${duelResult}`)">
-      Scissors
-    </button>
+    <button onclick="
+      playGame('scissors');
+    ">Scissors</button>
 
     <script>
+      function playGame(playerMove) {
+          let computerMove = pickComputerMove ();
+          let duelResult = '';
+
+        if (playerMove === 'scissors') {
+          if (computerMove == 1) {
+            computerMove = 'rock';
+            duelResult = 'You lose.';
+          } else if (computerMove == 2) {
+            computerMove = 'paper';
+            duelResult = 'You win.';
+          } else if (computerMove == 3) {
+            computerMove = 'scissors';
+            duelResult = 'Tie.';
+          }
+
+        } else if (playerMove === 'paper') {
+            if (computerMove == 1) {
+            computerMove = 'rock';
+            duelResult = 'You win.';
+          } else if (computerMove == 2) {
+            computerMove = 'paper';
+            duelResult = 'Tie.';
+          } else if (computerMove == 3) {
+            computerMove = 'scissors';
+            duelResult = 'You lose.';
+          }
+
+        } else if (playerMove === 'rock') {
+            if (computerMove == 1) {
+            computerMove = 'rock';
+            duelResult = 'Tie.';
+          } else if (computerMove == 2) {
+            computerMove = 'paper';
+            duelResult = 'You lose.';
+          } else if (computerMove == 3) {
+            computerMove = 'scissors';
+            duelResult = 'You win.';
+          }}
+
+        alert(`You picked ${playerMove}. Computer picked ${computerMove}. ${duelResult}`)
+      }
+
+      function pickComputerMove () {
+        let computerMove = Math.floor(Math.random() * 3) + 1;
+        return computerMove;
+      };
     </script>
   </body>
 </html>
