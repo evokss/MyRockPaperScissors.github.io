@@ -11,8 +11,8 @@ This project implemented using HTML, CSS, and JavaScript. <br>
 
 *The CSS file styles:*
 - *the background,*
-- *text, buttons, and
-- other elements for a visually appealing layout.*
+- *text, buttons, and*
+- *other elements for a visually appealing layout.*
 ---
 
 *The JavaScript code handles the game logic:*
