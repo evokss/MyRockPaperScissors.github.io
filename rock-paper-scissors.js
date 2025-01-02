@@ -1,78 +1,59 @@
-let score = JSON.parse(localStorage.getItem('score')) || {
-    wins: 0,
-    losses: 0,
-    ties: 0
-  }
+const MOVES = {
+  rock: { beats: "scissors", losesTo: "paper" },
+  paper: { beats: "rock", losesTo: "scissors" },
+  scissors: { beats: "rock", losesTo: "paper" },
+};
 
-  document.querySelector('.js-score')
-    .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+let score = JSON.parse(localStorage.getItem("score")) || {
+  wins: 0,
+  losses: 0,
+  ties: 0,
+};
 
-  function playGame(playerMove) {
-      let computerMove = pickComputerMove ();
-      let duelResult = '';
+const updateScore = () => {
+  document.querySelector(
+    ".js-score"
+  ).innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
+};
 
-    if (playerMove === 'scissors') {
-      if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'You lose.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'You win.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'Tie.';
-      }
+const getComputerMove = () => {
+  const moves = Object.keys(MOVES);
+  return moves[Math.floor(Math.random() * moves.length)];
+};
 
-    } else if (playerMove === 'paper') {
-        if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'You win.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'Tie.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'You lose.';
-      }
+const getDuelResult = (playerMove, computerMove) => {
+  if (playerMove === computerMove) return "Tie.";
+  return MOVES[playerMove].beats === computerMove ? "You win." : "You lose.";
+};
 
-    } else if (playerMove === 'rock') {
-        if (computerMove == 1) {
-        computerMove = 'rock';
-        duelResult = 'Tie.';
-      } else if (computerMove == 2) {
-        computerMove = 'paper';
-        duelResult = 'You lose.';
-      } else if (computerMove == 3) {
-        computerMove = 'scissors';
-        duelResult = 'You win.';
-      }}
+const updateGameUI = (playerMove, computerMove, result) => {
+  document.querySelector(".js-result").innerHTML = result;
+  document.querySelector(".js-moves").innerHTML = `You
+    <img src="images/${playerMove}-emoji.png" alt="move" class="move-icon">
+    <img src="images/${computerMove}-emoji.png" alt="move" class="move-icon">
+    Computer`;
+};
 
-    if (duelResult === 'You win.') {
-      score.wins += 1;
-    } else if (duelResult === 'You lose.') {
-      score.losses += 1;
-    } else if (duelResult === 'Tie.') {
-      score.ties += 1;
-    }
+const playGame = (playerMove) => {
+  const computerMove = getComputerMove();
+  const result = getDuelResult(playerMove, computerMove);
 
-    localStorage.setItem('score', JSON.stringify(score));
+  if (result.includes("win")) score.wins++;
+  else if (result.includes("lose")) score.losses++;
+  else score.ties++;
 
-    updateScoreElement();
+  localStorage.setItem("score", JSON.stringify(score));
+  updateScore();
+  updateGameUI(playerMove, computerMove, result);
+};
 
-    document.querySelector('.js-result').innerHTML = duelResult;
-    document.querySelector('.js-moves')
-      .innerHTML = `You
-        <img src="images/${playerMove}-emoji.png" alt="move" class="move-icon">
-        <img src="images/${computerMove}-emoji.png" alt="move" class="move-icon">
-        Computer`;
-  }
+// Initial score display
+updateScore();
 
-  function updateScoreElement() {
-    document.querySelector('.js-score')
-      .innerHTML = `Wins: ${score.wins}, Losses: ${score.losses}, Ties: ${score.ties}`;
-  }
-
-  function pickComputerMove () {
-    let computerMove = Math.floor(Math.random() * 3) + 1;
-    return computerMove;
-  };
+const resetGame = () => {
+  score = { wins: 0, losses: 0, ties: 0 };
+  localStorage.removeItem("score");
+  document.querySelector(".js-moves").innerHTML = "";
+  document.querySelector(".js-result").innerHTML = "";
+  updateScore();
+};
